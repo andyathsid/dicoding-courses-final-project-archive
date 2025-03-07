@@ -1,5 +1,5 @@
-ipykernel==6.29.5
-plotly==6.0.0
-matplotlib==0.13.2
-streamlit==1.42.2
-pandas==2.2.3
+ipykernel
+plotly
+matplotlib
+streamlit
+pandas
