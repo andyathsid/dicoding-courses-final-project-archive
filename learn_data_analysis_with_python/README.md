@@ -1,6 +1,6 @@
 # Bike Sharing Analysis Dashboard
 
-This is final project as part of Dicoding Data Analysis Course to analyzes bike sharing patterns from the[Capital Bikeshare system in Washington D.C. (2011-2012) ](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset), exploring user behavior, weather impacts, and temporal trends.
+This is final project as part of Dicoding Data Analysis Course to analyzes bike sharing patterns from the [Capital Bikeshare system in Washington D.C. (2011-2012) ](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset), exploring user behavior, weather impacts, and temporal trends.
 
 ## Live Demo
 Access the live dashboard at: [Bike Sharing Analysis Dashboard](https://andakara-dicoding-final-project-bike-sharing-analysis.streamlit.app)
