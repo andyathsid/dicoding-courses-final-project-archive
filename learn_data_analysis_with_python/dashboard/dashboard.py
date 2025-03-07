@@ -3,6 +3,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 import plotly.subplots as sp
+from pathlib import Path
 
 # Helper functions
 def create_hourly_patterns_df(df):
@@ -64,8 +65,9 @@ def create_lag_analysis_df(df):
 
 @st.cache_data
 def load_data():
-    hour_df = pd.read_csv('../data/bike-sharing-dataset/hour.csv')
-    day_df = pd.read_csv('../data/bike-sharing-dataset/day.csv')
+    data_dir = Path(__file__).parent.parent / 'data' / 'bike-sharing-dataset'
+    hour_df = pd.read_csv(data_dir / 'hour.csv')
+    day_df = pd.read_csv(data_dir / 'day.csv')
     
     hour_df['dteday'] = pd.to_datetime(hour_df['dteday'])
     day_df['dteday'] = pd.to_datetime(day_df['dteday'])
