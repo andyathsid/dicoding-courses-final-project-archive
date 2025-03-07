@@ -90,7 +90,7 @@ with st.container():
     with col2:
         st.markdown("""
         ### Quick Links
-        - [GitHub](https://github.com/andyathsid)
+        - [GitHub](https://github.com/andyathsid/dicoding-courses-final-project-archive/tree/c94653e35c2671c4c9b23ae0c43b6e292d97b7a0/learn_data_analysis_with_python)
         - [Data Source](https://archive.ics.uci.edu/dataset/275/bike+sharing+dataset)
         """)
     
