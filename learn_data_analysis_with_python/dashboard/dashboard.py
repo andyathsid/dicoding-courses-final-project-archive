@@ -65,7 +65,7 @@ def create_lag_analysis_df(df):
 
 @st.cache_data
 def load_data():
-    data_dir = Path(__file__).parent.parent / 'data' / 'bike-sharing-dataset'
+    data_dir = Path(__file__).parent
     hour_df = pd.read_csv(data_dir / 'hour.csv')
     day_df = pd.read_csv(data_dir / 'day.csv')
     
