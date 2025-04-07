@@ -1,0 +1,11 @@
+pandas
+matplotlib
+seaborn
+numpy
+plotly
+scikit-learn
+yellowbrick
+scipy
+kneed
+xgboost
+scikit-optimize
