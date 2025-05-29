@@ -1,0 +1,4 @@
+embedding_dim: 50
+lr: 0.001
+n_movies: 1680
+n_users: 942
