@@ -39,7 +39,7 @@ Industri konten digital dan streaming menghadapi tantangan dalam mempertahankan 
 
 ## Data Understanding
 
-Untuk proyek ini, saya menggunakan dataset MovieLens 100K yang berisi hampir 100.000 rating dari 943 pengguna untuk 1.682 film. Dataset ini dapat diunduh dari [GroupLens Research](https://grouplens.org/datasets/movielens/100k/). 
+Untuk proyek ini, saya menggunakan dataset MovieLens 100K yang berisi 100.000 rating dari 943 pengguna untuk 1.682 film. Dataset ini dapat diunduh dari [GroupLens Research](https://grouplens.org/datasets/movielens/100k/).
 
 Dataset MovieLens 100K terdiri dari beberapa file, dengan file utama yang digunakan dalam proyek ini adalah:
 
@@ -71,247 +71,29 @@ Dataset MovieLens 100K terdiri dari beberapa file, dengan file utama yang diguna
    - `occupation`: Pekerjaan pengguna (string)
    - `zip_code`: Kode pos pengguna (string)
 
-### Informasi Dataset
-
-Berikut adalah informasi dari dataset setelah dimuat menjadi dataframe.
-
-1. **Dataframe u.data (Rating Film)**:
-```
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 942 entries, 0 to 941
-Data columns (total 5 columns):
- #   Column      Non-Null Count  Dtype 
----  ------      --------------  ----- 
- 0   1           942 non-null    int64 
- 1   24          942 non-null    int64 
- 2   M           942 non-null    object
- 3   technician  942 non-null    object
- 4   85711       942 non-null    object
-dtypes: int64(2), object(3)
-memory usage: 36.9+ KB
-None
-```
-
-2. **Dataframe u.item (Informasi Film)**:
-```
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 1681 entries, 0 to 1680
-Data columns (total 24 columns):
- #   Column                                                 Non-Null Count  Dtype  
----  ------                                                 --------------  -----  
- 0   1                                                      1681 non-null   int64  
- 1   Toy Story (1995)                                       1681 non-null   object 
- 2   01-Jan-1995                                            1680 non-null   object 
- 3   Unnamed: 3                                             0 non-null      float64
- 4   http://us.imdb.com/M/title-exact?Toy%20Story%20(1995)  1678 non-null   object 
- 5   0                                                      1681 non-null   int64  
- 6   0.1                                                    1681 non-null   int64  
- 7   0.2                                                    1681 non-null   int64  
- 8   1.1                                                    1681 non-null   int64  
- 9   1.2                                                    1681 non-null   int64  
- 10  1.3                                                    1681 non-null   int64  
- 11  0.3                                                    1681 non-null   int64  
- 12  0.4                                                    1681 non-null   int64  
- 13  0.5                                                    1681 non-null   int64  
- 14  0.6                                                    1681 non-null   int64  
- 15  0.7                                                    1681 non-null   int64  
- 16  0.8                                                    1681 non-null   int64  
- 17  0.9                                                    1681 non-null   int64  
- 18  0.10                                                   1681 non-null   int64  
- 19  0.11                                                   1681 non-null   int64  
- 20  0.12                                                   1681 non-null   int64  
- 21  0.13                                                   1681 non-null   int64  
- 22  0.14                                                   1681 non-null   int64  
- 23  0.15                                                   1681 non-null   int64  
-dtypes: float64(1), int64(20), object(3)
-memory usage: 315.3+ KB
-None
-
-```
-
-3. **Dataframe u.user (Informasi Pengguna)**:
-```
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 99999 entries, 0 to 99998
-Data columns (total 4 columns):
- #   Column     Non-Null Count  Dtype
----  ------     --------------  -----
- 0   196        99999 non-null  int64
- 1   242        99999 non-null  int64
- 2   3          99999 non-null  int64
- 3   881250949  99999 non-null  int64
-dtypes: int64(4)
-memory usage: 3.1 MB
-None
-```
-
-### Invalid Values
-
-Berikut adalah hasil pengecekan data yang invalid berupa missing values dan duplikat.
-
-#### Missing Values
-```
-Missing values di dataset ratings:
-user_id      0
-movie_id     0
-rating       0
-timestamp    0
-dtype: int64
-
-Missing values di dataset movies:
-movie_id                 0
-title                    0
-release_date             1
-video_release_date    1681
-imdb_url                 3
-unknown                  0
-Action                   0
-Adventure                0
-Animation                0
-Children                 0
-Comedy                   0
-Crime                    0
-Documentary              0
-Drama                    0
-Fantasy                  0
-Film-Noir                0
-Horror                   0
-Musical                  0
-Mystery                  0
-Romance                  0
-Sci-Fi                   0
-Thriller                 0
-War                      0
-Western                  0
-dtype: int64
-
-Missing values di dataset users:
-user_id       0
-age           0
-gender        0
-occupation    0
-zip_code      0
-dtype: int64
-```
-
-#### Duplicate Values
-```
-Jumlah duplikat di dataset ratings: 0
-Jumlah duplikat di dataset movies: 0
-Jumlah duplikat di dataset users: 0
-```
-
-Tidak ada duplikat di dataset, namun masih ada missing values yang pada 3 kolom di dataset `movies`, yakni `release_date`, `video_release_date`, dan `imdb_url`
-
 ### Exploratory Data Analysis (EDA)
 
 #### Statistik Deskriptif
 
-##### Data Informasi Pengguna
-
-```
-user_id         age
-count  942.000000  942.000000
-mean   472.500000   34.062633
-std    272.076276   12.194810
-min      2.000000    7.000000
-25%    237.250000   25.000000
-50%    472.500000   31.000000
-75%    707.750000   43.000000
-max    943.000000   73.000000
-```
-
-##### Data Informasi Film
-
-```
-          movie_id         release_date      unknown       Action  \
-count  1680.000000                 1680  1680.000000  1680.000000   
-mean    842.342262  1989-07-15 08:24:00     0.000595     0.149405   
-min       2.000000  1922-01-01 00:00:00     0.000000     0.000000   
-25%     422.750000  1993-01-01 00:00:00     0.000000     0.000000   
-50%     842.500000  1995-01-01 00:00:00     0.000000     0.000000   
-75%    1262.250000  1996-10-18 00:00:00     0.000000     0.000000   
-max    1682.000000  1998-10-23 00:00:00     1.000000     1.000000   
-std     485.348808                  NaN     0.024398     0.356593   
-
-         Adventure    Animation     Children       Comedy        Crime  \
-count  1680.000000  1680.000000  1680.000000  1680.000000  1680.000000   
-mean      0.080357     0.024405     0.072024     0.300000     0.064881   
-min       0.000000     0.000000     0.000000     0.000000     0.000000   
-25%       0.000000     0.000000     0.000000     0.000000     0.000000   
-50%       0.000000     0.000000     0.000000     0.000000     0.000000   
-75%       0.000000     0.000000     0.000000     1.000000     0.000000   
-max       1.000000     1.000000     1.000000     1.000000     1.000000   
-std       0.271926     0.154348     0.258604     0.458394     0.246389   
-
-       Documentary  ...      Fantasy    Film-Noir       Horror      Musical  \
-count  1680.000000  ...  1680.000000  1680.000000  1680.000000  1680.000000   
-mean      0.029762  ...     0.013095     0.014286     0.054762     0.033333   
-min       0.000000  ...     0.000000     0.000000     0.000000     0.000000   
-25%       0.000000  ...     0.000000     0.000000     0.000000     0.000000   
-50%       0.000000  ...     0.000000     0.000000     0.000000     0.000000   
-75%       0.000000  ...     0.000000     0.000000     0.000000     0.000000   
-max       1.000000  ...     1.000000     1.000000     1.000000     1.000000   
-std       0.169980  ...     0.113717     0.118701     0.227583     0.179559   
-
-           Mystery      Romance       Sci-Fi     Thriller          War  \
-count  1680.000000  1680.000000  1680.000000  1680.000000  1680.000000   
-mean      0.036310     0.147024     0.060119     0.149405     0.042262   
-min       0.000000     0.000000     0.000000     0.000000     0.000000   
-25%       0.000000     0.000000     0.000000     0.000000     0.000000   
-50%       0.000000     0.000000     0.000000     0.000000     0.000000   
-75%       0.000000     0.000000     0.000000     0.000000     0.000000   
-max       1.000000     1.000000     1.000000     1.000000     1.000000   
-std       0.187115     0.354235     0.237778     0.356593     0.201246   
-
-           Western  
-count  1680.000000  
-mean      0.016071  
-min       0.000000  
-25%       0.000000  
-50%       0.000000  
-75%       0.000000  
-max       1.000000  
-std       0.125788  
-
-[8 rows x 21 columns]
-```
-
-##### Data Rating Pengguna
-
-```
-user_id      movie_id        rating     timestamp
-count  99999.000000  99999.000000  99999.000000  9.999900e+04
-mean     462.487415    425.531965      3.529865  8.835289e+08
-std      266.614421    330.799501      1.125678  5.343878e+06
-min        1.000000      1.000000      1.000000  8.747247e+08
-25%      254.000000    175.000000      3.000000  8.794487e+08
-50%      447.000000    322.000000      4.000000  8.828269e+08
-75%      682.000000    631.000000      4.000000  8.882600e+08
-max      943.000000   1682.000000      5.000000  8.932866e+08
-```
-
-##### Dataset Gabungan
-
 Setelah menggabungkan data dari ketiga file utama, berikut adalah statistik deskriptif dari dataset gabungan:
 
-```
-user_id      movie_id        rating     timestamp
-count  99999.000000  99999.000000  99999.000000  9.999900e+04
-mean     462.487415    425.531965      3.529865  8.835289e+08
-std      266.614421    330.799501      1.125678  5.343878e+06
-min        1.000000      1.000000      1.000000  8.747247e+08
-25%      254.000000    175.000000      3.000000  8.794487e+08
-50%      447.000000    322.000000      4.000000  8.828269e+08
-75%      682.000000    631.000000      4.000000  8.882600e+08
-max      943.000000   1682.000000      5.000000  8.932866e+08
-```
+| Statistik | user_id | movie_id | rating | timestamp | age |
+|-----------|---------|----------|--------|-----------|-----|
+| count     | 99268   | 99268    | 99268  | 99268     | 99268 |
+| mean      | 463.69  | 428.26   | 3.53   | 8.83e+08  | 32.99 |
+| std       | 265.85  | 330.39   | 1.13   | 5.34e+06  | 11.57 |
+| min       | 2.00    | 2.00     | 1.00   | 8.75e+08  | 7.00 |
+| 25%       | 256.00  | 176.00   | 3.00   | 8.79e+08  | 24.00 |
+| 50%       | 449.00  | 323.00   | 4.00   | 8.83e+08  | 30.00 |
+| 75%       | 682.00  | 634.00   | 4.00   | 8.88e+08  | 40.00 |
+| max       | 943.00  | 1682.00  | 5.00   | 8.93e+08  | 73.00 |
 
 #### Distribusi Rating
 
 Berikut adalah distribusi rating yang diberikan pengguna:
 
 ![Distribusi Rating Film](plots/rating_distribution.png)
+*Placeholder untuk visualisasi distribusi rating*
 
 Dari distribusi ini terlihat bahwa mayoritas rating yang diberikan adalah positif, dengan rating 4 bintang sebagai yang terbanyak. Hal ini menunjukkan adanya bias positif dalam dataset yang perlu dipertimbangkan dalam pengembangan model.
 
@@ -339,6 +121,7 @@ Demikian juga dengan jumlah rating yang diterima oleh setiap film:
 Berikut adalah 10 film yang mendapatkan rating terbanyak:
 
 ![Film dengan Rating Terbanyak](plots/top_rated_movies.png)
+*Placeholder untuk visualisasi film dengan rating terbanyak*
 
 Film-film populer seperti "Star Wars (1977)" dan "Pulp Fiction (1994)" mendapatkan jumlah rating yang jauh lebih banyak dibandingkan film rata-rata, menunjukkan adanya popularity bias yang dapat mempengaruhi model collaborative filtering.
 
@@ -347,6 +130,7 @@ Film-film populer seperti "Star Wars (1977)" dan "Pulp Fiction (1994)" mendapatk
 Berikut adalah 10 film dengan rating rata-rata tertinggi (minimal 50 rating):
 
 ![Film dengan Rating Tertinggi](plots/highest_rated_movies.png)
+*Placeholder untuk visualisasi film dengan rating tertinggi*
 
 Film-film klasik dan yang mendapat pengakuan kritikus cenderung memiliki rating rata-rata yang tinggi, menunjukkan korelasi antara kualitas film secara umum dengan preferensi penonton dalam dataset.
 
@@ -357,8 +141,6 @@ Beberapa insight penting yang didapatkan dari EDA:
 - Genre Drama, Comedy, dan Action mendominasi dataset, yang mengindikasikan ketidakseimbangan genre yang perlu diperhatikan untuk content-based filtering.
 - Terdapat variasi signifikan dalam jumlah rating per pengguna (1-737) dan per film (1-583), mencerminkan masalah sparsity yang umum dalam sistem rekomendasi.
 - Film-film populer mendapatkan jauh lebih banyak rating, yang dapat menciptakan popularity bias dalam collaborative filtering.
-- Usia pengguna sangat beragam (7-73 tahun) dengan rata-rata 34 tahun, menunjukkan dataset mencakup preferensi dari berbagai kelompok umur yang dapat memengaruhi pola rekomendasi film.
-- Film-film dalam dataset mencakup rentang waktu produksi yang luas (1922-1998), dengan mayoritas film dirilis pada pertengahan hingga akhir 1990-an.
 
 ## Data Preparation
 
@@ -673,12 +455,3 @@ Berdasarkan hasil pengembangan dan evaluasi sistem rekomendasi film, dapat disim
 - Sistem ini dapat ditingkatkan dengan menambahkan lebih banyak fitur konten (seperti aktor, sutradara, kata kunci), menggunakan pendekatan hybrid yang menggabungkan kedua metode, atau mengimplementasikan model deep learning yang lebih kompleks untuk meningkatkan nilai R².
 
 Secara keseluruhan, sistem rekomendasi film yang dikembangkan dalam proyek ini telah berhasil memberikan solusi untuk masalah yang diidentifikasi dalam problem statement. 
-
-# Revision Checklist
-## First Submission
-- [x] **Kriteria 8: Data Preparation:** Pindahkan pembahasan representasi fitur dari bagian Pemodelan ke bagian Data Preparation.
-## Second Submission
-- [x] **Kriteria 7: Data Understanding:** Secara eksplisit mencatumkan informasi dataset untuk masing-masing data awal (u.data, u.item, .user).
-- [x] **Kriteria 7: Data Understanding:** Secara eksplisit menyertakan kondisi data awal yang memiliki missing values dan tidak memiliki duplikat.
-- [x] **Kriteria 7: Data Understanding:** Menyertakan statistika deskriptif data awal (ratings, movies, users).
-- [x] **Kriteria 7: Data Understanding:** Memastikan salah satu gambar pada Bagian EDA untuk dapat dimuat dengan baik.
