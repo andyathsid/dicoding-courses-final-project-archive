@@ -1,0 +1,49 @@
+# Petunjuk Menjalankan Proyek
+
+Pastikan semua keperluan yang tercantum dalam berkas `requirements.txt` sudah terinstal:
+```bash
+pip install -r requirements.txt
+```
+
+## Menjalankan ETL Pipeline
+Untuk menjalankan script main.py, buka terminal dan masuk ke direktori proyek, lalu jalankan perintah:
+```bash
+python main.py
+```
+
+### Contoh dengan opsi tambahan
+```bash
+# Jalankan dengan logging lebih detail
+python main.py --verbose
+
+# Hanya ekstrak data (tanpa transform/load)
+python main.py --extract-only
+
+# Batasi jumlah halaman/produk yang diambil
+python main.py --max-pages 10 --max-products 100
+
+# Simpan output dengan nama file khusus
+python main.py --output custom_output.csv
+```
+
+Atau bisa pakai script shell yang disediakan:
+```bash
+./run_etl.sh
+```
+
+## Pengujian
+Pengujian dilakukan menggunakan pytest. Pastikan masih berada di direktori proyek sebelum menjalankan perintah berikut:
+```bash
+pytest
+```
+Seluruh unit test yang ada di direktori tests akan ditemukan dan dijalankan secara otomatis.
+
+### Pengujian dengan cakupan (coverage)
+Untuk melihat cakupan tes:
+```bash
+pytest --cov=utils
+```
+
+## Google Sheet URL
+https://docs.google.com/spreadsheets/d/1lcW8xLlAgERTV009Lnm3rWuUaSzx9Fz-8PBTnqTaNwc/edit?usp=sharing
+

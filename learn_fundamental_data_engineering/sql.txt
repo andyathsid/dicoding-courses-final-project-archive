@@ -1,0 +1,17 @@
+
+CREATE TABLE IF NOT EXISTS fashion_products (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    title VARCHAR(255),
+    price VARCHAR(255),
+    rating FLOAT,
+    colors INTEGER,
+    size VARCHAR(50),
+    gender VARCHAR(50),
+    timestamp TIMESTAMPTZ DEFAULT NOW(),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_fashion_products_gender ON fashion_products(gender);
+CREATE INDEX IF NOT EXISTS idx_fashion_products_size ON fashion_products(size);
+
+uefA9rjgjpI4Q5yp
